@@ -85,7 +85,7 @@ def create_table_members():
         member_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL,
-        number INTEGER NOT NULL
+        number TEXT NOT NULL
     )
 """)
 

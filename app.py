@@ -65,7 +65,7 @@ def members():
                 print("\n --- Insert Members --- \n")
                 name = input("Enter Name: ")
                 email = input("Enter Email: ")
-                number = int(input("Enter Number: "))
+                number = input("Enter Number: ")
                 liberary.insert_into_members(name, email, number)
             case 2:
                 liberary.display_members()
@@ -74,7 +74,7 @@ def members():
                 member_id = int(input("Enter member id: "))
                 name = input("Enter New name: ")
                 email = input("Enter New email: ")
-                number = int(input("Enter new number: "))
+                number = input("Enter new number: ")
                 liberary.update_members(member_id, name, email, number)
             case 4:
                 print("\n --- Delete members --- \n")
