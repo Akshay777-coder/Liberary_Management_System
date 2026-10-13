@@ -33,11 +33,11 @@ def create_table_books():
     conn.close()
 
 
-def insert_into_books(title, author, price):
+def insert_into_books(title, author, is_issued, price):
   conn = create_db()
   cursor = conn.cursor()
 
-  cursor.execute(" INSERT INTO books(title, author, price) VALUES (?, ?, ?) ", (title, author, price))
+  cursor.execute(" INSERT INTO books(title, author, is_issued, price) VALUES (?, ?, ?, ?) ", (title, author, is_issued, price))
 
   conn.commit()
   conn.close()
@@ -58,9 +58,22 @@ def delete_book(book_id):
   conn = create_db()
   cursor = conn.cursor()
 
-  cursor.execute("DELETE FROM books WHERE book_id = ?", (book_id))
+  cursor.execute("DELETE FROM books WHERE book_id = ?", (book_id,))
 
   conn.commit()
+  conn.close()
+
+def display_books():
+  conn = create_db()
+  cursor = conn.cursor()
+
+  cursor.execute("SELECT * FROM books")
+
+  rows = cursor.fetchall()
+
+  for row in rows:
+    print(row)
+
   conn.close()
 
 def create_table_members():
@@ -71,8 +84,8 @@ def create_table_members():
     CREATE TABLE IF NOT EXISTS members (
         member_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        email TEXT,
-        phone TEXT
+        email TEXT NOT NULL,
+        number INTEGER NOT NULL
     )
 """)
 
@@ -83,7 +96,7 @@ def insert_into_members(name, email, number):
   conn = create_db()
   cursor = conn.cursor()
   
-  cursor.execute("INSERT INTO memebers(name, email, number) VALUES(?, ?, ?)", (name, email, number))
+  cursor.execute("INSERT INTO members(name, email, number) VALUES(?, ?, ?)", (name, email, number))
 
   conn.commit()
   conn.close()
@@ -93,18 +106,31 @@ def update_members(member_id, name, email, number):
   cursor = conn.cursor()
 
   cursor.execute("""
-    UPDATE books
+    UPDATE members
     SET name = ?, email = ?, number = ?
     WHERE member_id = ? """, (name, email, number, member_id))
 
   conn.commit()
   conn.close()
 
-def delete_book(member_id):
+def delete_members(member_id):
   conn = create_db()
   cursor = conn.cursor()
 
-  cursor.execute("DELETE FROM members WHERE member_id = ?", (member_id))
+  cursor.execute("DELETE FROM members WHERE member_id = ?", (member_id,))
 
   conn.commit()
+  conn.close()
+
+def display_members():
+  conn = create_db()
+  cursor = conn.cursor()
+
+  cursor.execute("SELECT * FROM members")
+
+  rows = cursor.fetchall()
+
+  for row in rows:
+    print(row)
+
   conn.close()
