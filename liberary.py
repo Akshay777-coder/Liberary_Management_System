@@ -40,6 +40,27 @@ def insert_into_books(title, author, price):
   conn.commit()
   conn.close()
 
+def update_books(book_id, title, author, is_issued, price):
+  conn = create_db()
+  cursor = conn.cursor()
+
+  cursor.execute("""
+    UPDATE books
+    SET title = ?, author = ?, is_issued = ?, price = ?
+    WHERE book_id = ? """, (title, author, is_issued, price, book_id))
+
+  conn.commit()
+  conn.close()
+
+def delete_book(book_id):
+  conn = create_db()
+  cursor = conn.cursor()
+
+  cursor.execute("DELETE FROM books WHERE book_id = ?", (book_id))
+
+  conn.commit()
+  conn.close()
+
 def create_table_members():
   conn = create_db()
   cursor = conn.cursor()
@@ -65,4 +86,23 @@ def insert_into_members(name, email, number):
   conn.commit()
   conn.close()
 
+def update_members(member_id, name, email, number):
+  conn = create_db()
+  cursor = conn.cursor()
 
+  cursor.execute("""
+    UPDATE books
+    SET name = ?, email = ?, number = ?
+    WHERE member_id = ? """, (name, email, number, member_id))
+
+  conn.commit()
+  conn.close()
+
+def delete_book(member_id):
+  conn = create_db()
+  cursor = conn.cursor()
+
+  cursor.execute("DELETE FROM members WHERE member_id = ?", (member_id))
+
+  conn.commit()
+  conn.close()
