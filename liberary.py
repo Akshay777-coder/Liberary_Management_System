@@ -28,7 +28,7 @@ def create_table_books():
     )
   """)
 
-  cursor.commit()
+  conn.commit()
   conn.close()
 
 def insert_into_books(title, author, price):
@@ -66,7 +66,7 @@ def create_table_members():
   cursor = conn.cursor()
 
   cursor.execute("""
-    CREATE TABLE IS NOT EXISTS members(
+    CREATE TABLE IF NOT EXISTS members(
       member_id INTERGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       email TEXT NOT NULL,
